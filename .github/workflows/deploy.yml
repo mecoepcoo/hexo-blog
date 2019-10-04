@@ -34,4 +34,4 @@ jobs:
         git add .
         git commit -m "deploy"
         git remote set-url origin "https://${{ secrets.ACCESS_KEY }}@github.com/mecoepcoo/mecoepcoo.github.com.git"
-        git push --force --quiet origin master
+        git push -f origin master
