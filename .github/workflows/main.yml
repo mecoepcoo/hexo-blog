@@ -1,0 +1,16 @@
+name: build
+
+on:
+  push:
+    tags: 
+      - /^[Vv].*release$/
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: install dependeces
+      run: |
+        echo start install
