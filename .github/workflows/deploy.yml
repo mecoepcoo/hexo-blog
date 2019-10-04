@@ -27,9 +27,10 @@ jobs:
         ACCESS_TOKEN: ${{secrets.ACCESS_TOKEN}}
         public: public
       run: |
-        apt-get update
-        apt-get install -y git
+        # apt-get update
+        # apt-get install -y git
         cd public
+        ls
         git init
         git add .
         git commit -m "deploy"
