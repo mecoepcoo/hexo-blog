@@ -33,5 +33,5 @@ jobs:
         git config --global user.name "mecoepcoo"
         git add .
         git commit -m "deploy"
-        git remote set-url origin "https://${{ secrets.ACCESS_KEY }}@github.com/mecoepcoo/mecoepcoo.github.com.git"
+        git remote add origin "https://${{ secrets.ACCESS_KEY }}@github.com/mecoepcoo/mecoepcoo.github.com.git"
         git push -f origin master
