@@ -33,4 +33,4 @@ jobs:
         git config --global user.name "mecoepcoo"
         git add .
         git commit -m "deploy"
-        git push --force --quiet "https://${{ secrets.ACCESS_TOKEN }}@github.com/mecoepcoo/mecoepcoo.github.com.git" origin master
+        git push --force --quiet "https://${{ secrets.ACCESS_KEY }}@github.com/mecoepcoo/mecoepcoo.github.com.git" origin master
