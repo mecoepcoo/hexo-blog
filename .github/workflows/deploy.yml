@@ -21,6 +21,18 @@ jobs:
         npm install
         npm run build
         ls
+    - name: deploy site
       env:
         CI: true
         ACCESS_TOKEN: ${{secrets.ACCESS_TOKEN}}
+        repo: git@github.com:mecoepcoo/mecoepcoo.github.com.git
+        https://github.com/mecoepcoo/mecoepcoo.github.com.git
+        public: public
+      run: |
+        apt-get update
+        apt-get install -y git
+        cd public
+        git init
+        git add .
+        git commit -m "deploy"
+        git push --force --quiet "https://${ACCESS_TOKEN}@github.com/mecoepcoo/mecoepcoo.github.com.git" origin master
