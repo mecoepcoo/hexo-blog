@@ -27,13 +27,12 @@ jobs:
         PUBLIC: public
       run: |
         cd $PUBLIC
-        echo ${{ secrets.ACCESS_KEY }}
         ls
         git init
         git config --global user.email "340349237@qq.com"
         git config --global user.name "mecoepcoo"
         git add .
         git commit -m "deploy"
-        git remote rm origin
-        git remote set-url origin "https://${{ secrets.ACCESS_KEY }}@github.com/mecoepcoo/mecoepcoo.github.com.git"
+        git remote add origin https://github.com/mecoepcoo/mecoepcoo.github.com.git
+        git remote set-url origin https://${{ secrets.ACCESS_KEY }}@github.com/mecoepcoo/mecoepcoo.github.com.git
         git push -f origin test:master
