@@ -1,0 +1,26 @@
+name: Deploy CI
+
+on:
+  push:
+    branches: 
+      - master
+
+jobs:
+  deploy:
+    name: Deploy job
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: npm install, build
+      run: |
+        npm install
+        npm run build
+        ls
+      env:
+        CI: true
+        ACCESS_TOKEN: ${{secrets.ACCESS_TOKEN}}
