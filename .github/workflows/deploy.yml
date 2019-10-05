@@ -34,5 +34,4 @@ jobs:
         git add .
         git commit -m "deploy"
         git remote add origin https://github.com/mecoepcoo/mecoepcoo.github.com.git
-        git remote set-url origin https://${{ secrets.ACCESS_KEY }}@github.com/mecoepcoo/mecoepcoo.github.com.git
-        git push -f origin test:master
+        git push -f "https://${{ secrets.ACCESS_KEY }}@github.com/mecoepcoo/mecoepcoo.github.com.git" master:master
