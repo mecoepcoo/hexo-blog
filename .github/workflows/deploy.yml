@@ -25,6 +25,7 @@ jobs:
       env:
         CI: true
         PUBLIC: public
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         cd $PUBLIC
         ls
@@ -34,4 +35,4 @@ jobs:
         git add .
         git commit -m "deploy"
         git remote add origin https://github.com/mecoepcoo/mecoepcoo.github.com.git
-        git push -f "https://${{ secrets.ACCESS_KEY }}@github.com/mecoepcoo/mecoepcoo.github.io.git" master:master
+        git push -f "https://${GH_TOKEN}@github.com/mecoepcoo/mecoepcoo.github.io.git" master:master
