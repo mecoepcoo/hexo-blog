@@ -26,6 +26,7 @@ jobs:
         PUBLIC: public
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
+        cp CNAME $PUBLIC
         cd $PUBLIC
         git init
         git config --global user.email "340349237@qq.com"
