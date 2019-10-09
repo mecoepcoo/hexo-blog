@@ -1,6 +1,7 @@
 ---
 title: 让mocha支持ES6模块
 date: 2018/9/26 21:00:00
+updated: 2018/9/26 21:00:00
 categories: 
 - 测试
 tags: 
