@@ -1,7 +1,7 @@
 ---
-title: 让mocha支持ES6模块
+title: 解决windows下控制台和git输出乱码的问题
 date: 2019/9/27 21:08:00
-updated: 2019/9/27 21:08:00
+updated: 2019/11/6 23:54:00
 categories: 
 - 开发环境
 tags: 
