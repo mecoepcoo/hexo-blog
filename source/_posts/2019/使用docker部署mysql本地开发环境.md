@@ -1,7 +1,7 @@
 ---
 title: 使用docker部署mysql本地开发环境
 date: 2019/10/1 12:05:00
-updated: 2019/10/1 12:05:00
+updated: 2019/12/25 23:32:00
 categories: 
 - 云容器
 tags: 
@@ -28,8 +28,8 @@ $ docker run -p 3308:3306 -v /home/dev-enviroment/:/var/lib/mysql -d -e MYSQL_RO
 # 配置远程访问
 对于容器内服务来说，宿主机是一台远程主机，需要修改配置以支持数据库连接。
 ```bash
-$ docker exec -it 01873d bash # 以交互模式进入容器，并运行bash
-# windows用户需要以管理员身份运行，如果在cmd中无法进入，可尝试使用git bash等工具
+$ docker exec -it 01873d bash # 以交互模式进入容器，并运行bash，这里的01873d是container id的前几位
+# windows用户需要以管理员身份运行，如果在cmd中无法进入，可尝试使用git bash等工具，如果提示要加前缀，就在docker命令前增加前缀
 
 # 进入mysql命令行
 $ mysql -uroot -p1234
