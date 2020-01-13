@@ -3,7 +3,7 @@ title: 从零搭建webpack4+react+typescript+eslint脚手架(二)
 date: 2019/10/2 9:34:00
 updated: 2019/10/2 9:34:00
 categories: 
-- react
+- 从零搭建webpack4+react+typescript+eslint脚手架
 tags: 
 - 工程化
 - react

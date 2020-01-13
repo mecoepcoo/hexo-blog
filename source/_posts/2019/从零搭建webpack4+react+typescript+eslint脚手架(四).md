@@ -1,9 +1,9 @@
 ---
 title: 从零搭建webpack4+react+typescript+eslint脚手架(四)
 date: 2019/10/4 13:05:00
-updated: 2019/10/4 13:05:00
+updated: 2020/1/13 22:37:00
 categories: 
-- react
+- 从零搭建webpack4+react+typescript+eslint脚手架
 tags: 
 - 工程化
 - react
@@ -90,6 +90,38 @@ module.exports = merge.smart(baseWebpackConfig, {
 ```
 
 运行`npm run dev`看看效果吧。
+
+## 自动寻找空闲端口监听
+按照上述配置，如果`8080端口`已经被占用，则webpack开发服务器会报错退出，无法启动，我们可以利用[portfinder](https://github.com/http-party/node-portfinder)来自动搜索空闲的端口。
+
+首先安装依赖：
+
+```bash
+$ npm i -D portfinder
+```
+
+然后增加如下配置：
+```javascript
+// webpack.dev.js
+const portfinder = require('portfinder'); // 增加依赖
+
+/* 将module.exports = merge.smart()修改为如下形式 */
+const devWebpackConfig = merge.smart(/* ... */);
+
+/* 寻找可用端口，并返回一个promise类型的配置，webpack可以接收promise作为配置 */
+module.exports = new Promise((resolve, reject) => {
+  portfinder.basePort = config.devServer.port;
+  portfinder.getPort((err, port) => {
+    if (err) reject(err)
+    else {
+      devWebpackConfig.devServer.port = port;
+    }
+    resolve(devWebpackConfig)
+  })
+});
+```
+
+不要关闭原有的server，再次运行`npm run dev`看看效果吧。
 
 # 自定义多环境
 一般来说，我们在开发应用的时候会面临多个环境差异的问题，例如，我们有：
