@@ -316,7 +316,7 @@ symbols_count_time:
   separated_meta: true
   item_text_post: true
   item_text_total: true
-  awl: 4
+  awl: 2
   wpm: 275
   suffix: mins.
 
@@ -327,7 +327,7 @@ tag_icon: true
 wechat_subscriber:
   enable: true
   qcode: /images/qrcode_hailuo.jpg
-  description: 扫描二维码关注我的订阅号“有问必答的小海螺”
+  description: 扫描二维码关注我的订阅号“前端小海螺”
 
 # Reward (Donate)
 reward_settings:
@@ -418,7 +418,7 @@ android_chrome_color: "#222"
 safari_rainbow: false
 
 # Optimize the display of scrollbars on webkit based browsers.
-custom_scrollbar: false
+custom_scrollbar: true
 
 # Custom Logo (Do not support scheme Mist)
 custom_logo: #/uploads/custom-logo.jpg
