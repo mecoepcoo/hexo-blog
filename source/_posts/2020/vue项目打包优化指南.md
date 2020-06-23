@@ -93,3 +93,95 @@ module.exports = {
   },
 }
 ```
+
+# 按需打包lodash
+`lodash` 也是前端常用的一个工具库，有两种方案可以减小它的打包体积。
+
+首先我们这么写代码，然后选择下面任意一种方法完成优化：
+```javascript
+import { cloneDeep } from 'lodash'
+
+const a = { k: 'v' }
+const b = cloneDeep(a)
+```
+
+## 使用lodash-es（推荐）
+如果使用es模块，那么可以直接安装 `lodash-es`：
+
+```bash
+$ npm i lodash-es
+```
+
+## lodash-webpack-plugin插件
+也可以使用 `lodash-webpack-plugin` 插件，自动移除没有用到的lodash代码：
+
+> 注意：这个插件在使用 `find` 等方法时可能会删除一些必要的依赖，导致程序报错，解决方法是自己补全依赖，或者换用 `lodash-es`
+
+```javascript
+// vue.config.js
+const LodashWebpackPlugin = require('lodash-webpack-plugin')
+
+module.exports = {
+  configureWebpack: config => {
+    const plugins = [
+      // 加入这条
+      new LodashWebpackPlugin(),
+    ]
+  },
+}
+```
+
+# 压缩代码
+新版本的vue-cli是自动压缩代码的，所以不需要额外的配置。如果使用旧版cli生成项目，可以查询 [terser](https://github.com/terser/terser) 相关的用法。
+
+> `uglifyify.js` 已经停止维护了，不要再使用这个库
+
+# 生成gzip文件
+nginx可以帮助我们将资源自动压缩为gzip文件，如果我们在打包时能够提供一份压缩好的gzip文件的话，传输会更快。
+
+这里使用 `compression-webpack-plugin` 插件：
+
+```bash
+$ npm i -D compression-webpack-plugin
+```
+
+编辑webpack配置：
+```javascript
+// vue.config.js
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const productionGzipExtensions = ['js', 'css']
+
+module.exports = {
+  configureWebpack: config => {
+    const plugins = [
+      new CompressionWebpackPlugin({
+        filename: '[path].gz[query]',
+        algorithm: 'gzip',
+        test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+        threshold: 10240,
+        minRatio: 0.8
+      }),
+    ]
+    // 仅在生产环境压缩，提高开发时的编译速度
+    if (process.env.NODE_ENV === 'production') {
+      config.plugins = [...plugins, ...config.plugins]
+      config.optimization = {
+        splitChunks: {
+          cacheGroups: {
+            // 提取公共模块
+            commons: {
+              chunks: 'all',
+              minChunks: 2,
+              maxInitialRequests: 5,
+              minSize: 0,
+              name: 'common'
+            }
+          }
+        },
+      }
+    }
+  },
+}
+```
+
+> 注意：gzip还需要服务端支持，一般在nginx上做配置
