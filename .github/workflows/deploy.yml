@@ -44,7 +44,7 @@ jobs:
       run: |
         cd new-rep
         cp ../hexo-blog/CNAME ./
-        cp -r ../hexo-blog/${{ PUBLIC }}/* ./
+        cp -r ../hexo-blog/${PUBLIC}/* ./
         ls
         git add .
         git config --global user.email "340349237@qq.com"
