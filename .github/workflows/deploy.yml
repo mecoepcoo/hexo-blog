@@ -29,7 +29,7 @@ jobs:
     - name: Checkout GH-PAGE
       uses: actions/checkout@v2
       with:
-        repository: https://github.com/mecoepcoo/mecoepcoo.github.io.git
+        repository: mecoepcoo/mecoepcoo.github.io
         path: gh-page
     - name: Clean
       run: |
