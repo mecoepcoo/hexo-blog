@@ -23,7 +23,7 @@ jobs:
         npm run build
         cp CNAME public
     - name: Publish
-      uses: s0/git-publish-subdir-action@master
+      uses: s0/git-publish-subdir-action@develop
       env:
         REPO: git@github.com:mecoepcoo/mecoepcoo.github.io.git
         BRANCH: master
