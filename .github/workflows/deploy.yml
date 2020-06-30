@@ -13,41 +13,20 @@ jobs:
     steps:
     - name: Checkout hexo-blog
       uses: actions/checkout@v2
-      with: 
-        path: hexo-blog
     - name: Setup Node.js
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
     - name: Build
       run: |
-        cd hexo-blog
         npm install
         npm run build
-        ls
-        cd ../
-    - name: Checkout GH-PAGE
-      uses: actions/checkout@v2
-      with:
-        repository: mecoepcoo/mecoepcoo.github.io
-        path: gh-page
-    - name: Clean
-      run: |
-        mkdir new-rep
-        cp -r gh-page/* new-rep
-        rm -rf gh-page
-    - name: Deploy site
+        cp CNAME public
+    - name: Publish
+      uses: s0/git-publish-subdir-action@master
       env:
-        CI: true
-        PUBLIC: public
+        REPO: mecoepcoo/mecoepcoo.github.io
+        BRANCH: master
+        FOLDER: public
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      run: |
-        cd new-rep
-        cp ../hexo-blog/CNAME ./
-        cp -r ../hexo-blog/${PUBLIC}/* ./
-        ls
-        git add .
-        git config --global user.email "340349237@qq.com"
-        git config --global user.name "mecoepcoo"
-        git commit -m "deploy"
-        git push origin master:master
+
