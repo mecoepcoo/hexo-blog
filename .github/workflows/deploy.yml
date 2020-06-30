@@ -11,22 +11,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout hexo-blog
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
     - name: Setup Node.js
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
-    - name: Build
+    - name: npm install, build
       run: |
         npm install
         npm run build
-        cp CNAME public
-    - name: Publish
-      uses: s0/git-publish-subdir-action@develop
+    - name: deploy site
       env:
-        REPO: git@github.com:mecoepcoo/mecoepcoo.github.io.git
-        BRANCH: master
-        FOLDER: public
-        SSH_PRIVATE_KEY: ${{ secrets.GH_TOKEN }}
-
+        CI: true
+        PUBLIC: public
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: |
+        cp CNAME $PUBLIC
+        cd $PUBLIC
+        git init
+        git config --global user.email "340349237@qq.com"
+        git config --global user.name "mecoepcoo"
+        git add .
+        git commit -m "deploy"
+        git remote add origin https://github.com/mecoepcoo/mecoepcoo.github.com.git
+        git push -f "https://${GH_TOKEN}@github.com/mecoepcoo/mecoepcoo.github.io.git" master:master
