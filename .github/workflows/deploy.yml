@@ -28,5 +28,5 @@ jobs:
         REPO: git@github.com:mecoepcoo/mecoepcoo.github.io.git
         BRANCH: master
         FOLDER: public
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        SSH_PRIVATE_KEY: ${{ secrets.GH_TOKEN }}
 
