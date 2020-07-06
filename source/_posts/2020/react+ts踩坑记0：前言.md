@@ -155,6 +155,7 @@ export default {
 }
 ```
 
+在react中：
 ```typescript
 import { DeepReadonly } from 'utility-types'
 import { ActionType, createAction } from 'typesafe-actions'
