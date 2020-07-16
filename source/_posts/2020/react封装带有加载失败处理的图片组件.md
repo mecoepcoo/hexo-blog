@@ -20,6 +20,8 @@ tags:
 <img src="logo.png" onerror="javascript:this.src='logoError.png';" />
 ```
 
+<!-- more -->
+
 # 封装组件
 知道了原理就好办了，在react中，要使用 `onError` 事件：
 
@@ -60,7 +62,7 @@ export default ImgWithDefault
 // 注意下面onerror的大小写
 onError={(e) => {
   if (Img.current) {
-    e.target.onerror = null
+    e.currentTarget.onerror = null
     Img.current.src = defaultImg
   }
 }}
