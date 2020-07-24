@@ -20,6 +20,8 @@ tags:
 <img src="logo.png" onerror="javascript:this.src='logoError.png';" />
 ```
 
+<!-- more -->
+
 # 封装组件
 知道了原理就好办了，在react中，要使用 `onError` 事件：
 
