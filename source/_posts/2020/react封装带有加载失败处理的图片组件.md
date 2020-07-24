@@ -56,14 +56,39 @@ export default ImgWithDefault
 
 当网络状况很差时，`defaultImg`也可能加载失败，这样`onError`就会陷入死循环，因此这里需要做个改造：
 
-```javascript
-// 注意下面onerror的大小写
-onError={(e) => {
-  if (Img.current) {
-    e.target.onerror = null
-    Img.current.src = defaultImg
+```typescript
+import React, { useState } from 'react'
+
+interface Props {
+  src: string
+  style?: React.CSSProperties
+  className: string
+  defaultImg: string
+}
+
+const ImgWithDefault: React.FC<Props> = ({ src, style = {}, className = '', defaultImg }) => {
+  // 新增一个状态，标记是否发生过错误
+  const [imgError, setImgError] = useState(false)
+  const Img = React.createRef<HTMLImageElement>()
+
+  if (!imgError) {
+    return (
+      <img
+        ref={Img}
+        style={style}
+        className={className}
+        src={src}
+        onError={() => {
+          if (Img.current) setImgError(true)
+        }}
+        alt=""
+      />
+    )
+  } else {
+    // 重点在这里，如果发生错误的话，不再带有onerror处理，防止陷入僵局
+    return <img style={style} className={className} src={defaultImg} alt="" />
   }
-}}
+}
 ```
 
 # 使用方法
